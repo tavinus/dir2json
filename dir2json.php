@@ -47,7 +47,8 @@ function dir2json($dir)
 }
 
 // Long and short help opts
-if ($argv[1] === "-h" || $argv[1] === "--help")
+$param = isset($argv[1]) ? $argv[1] : '';
+if ($param === "-h" || $param === "--help")
 {
     echo <<<EOT
 ------------------------------------------------------
