@@ -96,7 +96,7 @@ if (!is_dir($targetFolder)) {
     exit(2);
 }
 
-// If we have and output file name
+// If we have an output file name
 if (empty($outputFile)) {
     echo "Need a valid output file name (empty)\n";
     exit(3);
