@@ -1,50 +1,71 @@
 #!/usr/bin/env php
 <?php
 // ------------------------------------------------------
-// dir2json - v0.1.1b
+// dir2json
 //
 // by Ryan, 2015
 // http://www.ryadel.com/
+// Gustavo Arnosti Neves - 2018
+// https://github.com/tavinus
 // ------------------------------------------------------
-// Type the following for help:
-//   > php dir2json -h
+// Use -h or --help for help, eg:
+//   > ./dir2json.php -h
+//   > php dir2json.php --help
 // ------------------------------------------------------
+
+$DIR2JSON = '0.2.0';
+
 function dir2json($dir)
 {
-    $a = [];
+    $dirList = [];
+	
+	$excludes = [
+		".",
+		"..",
+		"Thumb.db",
+		"Thumbs.db",
+		".DS_Store",
+		".DS_Store?",
+		".Spotlight-V100",
+		".Trashes",
+		"ehthumbs.db",
+	];
+
     if($handler = opendir($dir))
     {
         while (($content = readdir($handler)) !== FALSE)
         {
-            if ($content != "." && $content != ".." && $content != "Thumb.db")
+            if (!in_array($content, $excludes))
             {
-                if(is_file($dir."/".$content)) $a[] = $content;
-				else if(is_dir($dir."/".$content)) $a[$content] = dir2json($dir."/".$content); 
+                if(is_file($dir."/".$content)) $dirList[] = $content;
+				else if(is_dir($dir."/".$content)) $dirList[$content] = dir2json($dir."/".$content); 
             } 
         }    
         closedir($handler); 
     } 
-    return $a;    
+    return $dirList;    
 }
-$argv1 = $argv[1];
-if (stripos($argv1,"-h") !== false) 
-{
-echo <<<EOT
-------------------------------------------------------
-dir2json - v0.1.1b
 
-by Ryan, 2015
+// Long and short help opts
+if ($argv[1] === "-h" || $argv[1] === "--help")
+{
+	echo <<<EOT
+------------------------------------------------------
+dir2json - v$DIR2JSON
+
+by Ryan & Tavinus, 2015-2018
 http://www.ryadel.com/
+https://github.com/Darkseal/dir2json
 ------------------------------------------------------
 		
 USAGE (from CLI):
- > php dir2json <targetFolder> <outputFile> [JSON_OPTIONS]
+ > ./dir2json.php <targetFolder> <outputFile> [JSON_OPTIONS]
 
 EXAMPLE:
- > php dir2json ./images out.json JSON_PRETTY_PRINT
+ > ./dir2json.php ./ ./cache.json JSON_PRETTY_PRINT
 
 HELP:
- > php dir2json -h
+ > ./dir2json.php -h
 		
 JSON_OPTIONS is a bitmask consisting of:
   JSON_HEX_QUOT, JSON_HEX_TAG, JSON_HEX_AMP, JSON_HEX_APOS, JSON_NUMERIC_CHECK, 
@@ -58,21 +79,35 @@ for further info on PHP's json_encode function, read here:
   http://php.net/manual/en/function.json-encode.php
 
 ------------------------------------------------------
+
 EOT;
-    exit;
+    exit(0);
 }
 
-$argv2 = $argv[2];
-$argv3 = $argv[3];
-if (empty($argv3)) $argv3 = 0;
-else $argv3 = constant($argv3);
+// Parse parameters
+$targetFolder = isset($argv[1]) ? $argv[1] : null;
+$outputFile   = isset($argv[2]) ? $argv[2] : null;
+$jsonOptions  = isset($argv[3]) ? $argv[3] : null;
+$jsonOptions  = empty($jsonOptions) ? 0 : constant($jsonOptions);
 
-if (empty($argv2)) {
-    echo "invalid arguments";
-	exit;
+// If we have a folder to read
+if (!is_dir($targetFolder)) {
+	echo "Cannot open folder $targetFolder\n";
+	exit(2);
 }
 
-$arr = dir2json($argv1);
-$json = json_encode($arr, $argv3);
-file_put_contents($argv2, $json);
+// If we have and output file name
+if (empty($outputFile)) {
+    echo "Need a valid output file name (empty)\n";
+	exit(3);
+}
+
+$arr  = dir2json($targetFolder);
+$json = json_encode($arr, $jsonOptions);
+if (!file_put_contents($outputFile, $json)) {
+	echo "Could not save output file: $outputFile\n";
+	exit(4);
+}
+
+exit(0);
 ?>
