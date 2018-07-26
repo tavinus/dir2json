@@ -18,18 +18,18 @@ $DIR2JSON = '0.2.0';
 function dir2json($dir)
 {
     $dirList = [];
-	
-	$excludes = [
-		".",
-		"..",
-		"Thumb.db",
-		"Thumbs.db",
-		".DS_Store",
-		".DS_Store?",
-		".Spotlight-V100",
-		".Trashes",
-		"ehthumbs.db",
-	];
+    
+    $excludes = [
+        ".",
+        "..",
+        "Thumb.db",
+        "Thumbs.db",
+        ".DS_Store",
+        ".DS_Store?",
+        ".Spotlight-V100",
+        ".Trashes",
+        "ehthumbs.db",
+    ];
 
     if($handler = opendir($dir))
     {
@@ -38,7 +38,7 @@ function dir2json($dir)
             if (!in_array($content, $excludes))
             {
                 if(is_file($dir."/".$content)) $dirList[] = $content;
-				else if(is_dir($dir."/".$content)) $dirList[$content] = dir2json($dir."/".$content); 
+                else if(is_dir($dir."/".$content)) $dirList[$content] = dir2json($dir."/".$content); 
             } 
         }    
         closedir($handler); 
@@ -49,7 +49,7 @@ function dir2json($dir)
 // Long and short help opts
 if ($argv[1] === "-h" || $argv[1] === "--help")
 {
-	echo <<<EOT
+    echo <<<EOT
 ------------------------------------------------------
 dir2json - v$DIR2JSON
 
@@ -57,7 +57,7 @@ by Ryan & Tavinus, 2015-2018
 http://www.ryadel.com/
 https://github.com/Darkseal/dir2json
 ------------------------------------------------------
-		
+        
 USAGE (from CLI):
  > ./dir2json.php <targetFolder> <outputFile> [JSON_OPTIONS]
 
@@ -66,7 +66,7 @@ EXAMPLE:
 
 HELP:
  > ./dir2json.php -h
-		
+        
 JSON_OPTIONS is a bitmask consisting of:
   JSON_HEX_QUOT, JSON_HEX_TAG, JSON_HEX_AMP, JSON_HEX_APOS, JSON_NUMERIC_CHECK, 
   JSON_PRETTY_PRINT, JSON_UNESCAPED_SLASHES, JSON_FORCE_OBJECT, JSON_PRESERVE_ZERO_FRACTION, 
@@ -92,21 +92,21 @@ $jsonOptions  = empty($jsonOptions) ? 0 : constant($jsonOptions);
 
 // If we have a folder to read
 if (!is_dir($targetFolder)) {
-	echo "Cannot open folder $targetFolder\n";
-	exit(2);
+    echo "Cannot open folder $targetFolder\n";
+    exit(2);
 }
 
 // If we have and output file name
 if (empty($outputFile)) {
     echo "Need a valid output file name (empty)\n";
-	exit(3);
+    exit(3);
 }
 
 $arr  = dir2json($targetFolder);
 $json = json_encode($arr, $jsonOptions);
 if (!file_put_contents($outputFile, $json)) {
-	echo "Could not save output file: $outputFile\n";
-	exit(4);
+    echo "Could not save output file: $outputFile\n";
+    exit(4);
 }
 
 exit(0);
