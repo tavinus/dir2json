@@ -47,9 +47,9 @@ function dir2json($dir)
 }
 
 function usage($str='', $ret=2) {
-	if (!empty($str)) echo $str."\n";
-	echo "For help, try:\n  ./dir2json.php -h\n";
-	exit($ret);
+    if (!empty($str)) echo $str."\n";
+    echo "For help, try:\n  ./dir2json.php -h\n";
+    exit($ret);
 }
 
 // Long and short help opts
@@ -99,19 +99,19 @@ $jsonOptions  = empty($jsonOptions) ? 0 : constant($jsonOptions);
 
 // If we have a folder to read
 if (!is_dir($targetFolder)) {
-	if (empty($targetFolder)) $targetFolder = '(empty)';
-	usage("Cannot open folder $targetFolder", 2);
+    if (empty($targetFolder)) $targetFolder = '(empty)';
+    usage("Cannot open folder $targetFolder", 2);
 }
 
 // If we have an output file name
 if (empty($outputFile)) {
-	usage("Need a valid output file name (empty)", 3);
+    usage("Need a valid output file name (empty)", 3);
 }
 
 $arr  = dir2json($targetFolder);
 $json = json_encode($arr, $jsonOptions);
 if (!file_put_contents($outputFile, $json)) {
-	usage("Could not save output file: $outputFile", 4);
+    usage("Could not save output file: $outputFile", 4);
 }
 
 exit(0);
