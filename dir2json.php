@@ -38,9 +38,9 @@ function dir2json($dir)
             if (!in_array($content, $excludes))
             {
                 if(is_file($dir."/".$content)) 
-					$dirList[] = $content;
+                    $dirList[] = $content;
                 else if(is_dir($dir."/".$content)) 
-					$dirList[$content] = dir2json($dir."/".$content); 
+                    $dirList[$content] = dir2json($dir."/".$content); 
             } 
         }    
         closedir($handler); 
