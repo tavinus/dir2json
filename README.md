@@ -1,11 +1,13 @@
 # dir2json
-A PHP CLI script to ouput the contents of a whole directory tree to a JSON object.
-
+A PHP CLI script to ouput the contents of a whole directory tree to a JSON object.  
+  
 *by Ryan, 2015*  
 http://www.ryadel.com/
 * [Official Page](http://www.ryadel.com/en/portfolio/dir2json-en/)
 * [Documentation & info](http://www.ryadel.com/dir2json-a-php-cli-script-to-output-the-contents-of-a-folder-tree-into-a-json-object/)
-
+  
+*Updates by Tavinus, 2018/2019*  
+  
 ## What does it do
 It fetches a directory tree structure like this:
 
@@ -85,7 +87,7 @@ $ ./dir2json.php -h
 ------------------------------------------------------
 dir2json - v0.3.0
 
-by Ryan & Tavinus, 2015-2018
+by Ryan & Tavinus, 2015-2019
 http://www.ryadel.com/
 https://github.com/Darkseal/dir2json
 ------------------------------------------------------

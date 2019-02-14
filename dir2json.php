@@ -5,7 +5,7 @@
 //
 // by Ryan, 2015
 // http://www.ryadel.com/
-// Gustavo Arnosti Neves - 2018
+// Gustavo Arnosti Neves - 2018/2019
 // https://github.com/tavinus
 // ------------------------------------------------------
 // Use -h or --help for help, eg:
@@ -68,7 +68,7 @@ if ($param === "-h" || $param === "--help")
 ------------------------------------------------------
 dir2json - v$DIR2JSON
 
-by Ryan & Tavinus, 2015-2018
+by Ryan & Tavinus, 2015-2019
 http://www.ryadel.com/
 https://github.com/Darkseal/dir2json
 ------------------------------------------------------
