@@ -74,7 +74,12 @@ JSON_OPTIONS is a bitmask consisting of:
 The behaviour of these constants is described on the JSON constants page:
 http://php.net/manual/en/json.constants.php
 
-#### Help Info
+#### Example
+```
+ > php dir2json ./images out.json JSON_PRETTY_PRINT
+```
+
+## CLI Help Info
 ```
 $ ./dir2json.php -h
 ------------------------------------------------------
@@ -124,11 +129,6 @@ SORT_FLAGS defaults to SORT_LOCALE_STRING, always case insensitive:
   SORT_NATURAL       - compare items as strings using "natural ordering" like natsort()
 
 ------------------------------------------------------
-```
-
-#### Example
-```
- > php dir2json ./images out.json JSON_PRETTY_PRINT
 ```
 
 ## Useful Links
