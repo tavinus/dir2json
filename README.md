@@ -74,6 +74,58 @@ JSON_OPTIONS is a bitmask consisting of:
 The behaviour of these constants is described on the JSON constants page:
 http://php.net/manual/en/json.constants.php
 
+#### Help Info
+```
+$ ./dir2json.php -h
+------------------------------------------------------
+dir2json - v0.3.0
+
+by Ryan & Tavinus, 2015-2018
+http://www.ryadel.com/
+https://github.com/Darkseal/dir2json
+------------------------------------------------------
+
+USAGE (from CLI):
+ > ./dir2json.php <targetFolder> <outputFile> [JSON_OPTIONS] [SORT_ORDER] [SORT_FLAG]
+
+EXAMPLE:
+ > ./dir2json.php ./ ./cache.json JSON_PRETTY_PRINT SORT_DESC SORT_NATURAL
+
+HELP:
+ > ./dir2json.php -h
+
+------------------------------------------------------
+
+JSON_OPTIONS is a bitmask consisting of: (default: 0)
+  JSON_HEX_QUOT, JSON_HEX_TAG, JSON_HEX_AMP, JSON_HEX_APOS, JSON_NUMERIC_CHECK,
+  JSON_PRETTY_PRINT, JSON_UNESCAPED_SLASHES, JSON_FORCE_OBJECT, JSON_PRESERVE_ZERO_FRACTION,
+  JSON_UNESCAPED_UNICODE, JSON_PARTIAL_OUTPUT_ON_ERROR
+
+The behaviour of these constants is described on the JSON constants page:
+  http://php.net/manual/en/json.constants.php
+
+for further info on PHP's json_encode function, read here:
+  http://php.net/manual/en/function.json-encode.php
+
+------------------------------------------------------
+
+Sorting is done by the PHP funcion array_multisort()
+http://php.net/manual/en/function.array-multisort.php
+
+SORT_ORDER can be either:
+  SORT_ASC  - ascendingly (default)
+  SORT_DESC - descendingly
+
+SORT_FLAGS defaults to SORT_LOCALE_STRING, always case insensitive:
+  SORT_REGULAR       - compare items normally (don't change types)
+  SORT_NUMERIC       - compare items numerically
+  SORT_STRING        - compare items as strings
+  SORT_LOCALE_STRING - compare items as strings, based on the current locale.
+  SORT_NATURAL       - compare items as strings using "natural ordering" like natsort()
+
+------------------------------------------------------
+```
+
 #### Example
 ```
  > php dir2json ./images out.json JSON_PRETTY_PRINT
